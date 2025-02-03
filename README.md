@@ -15,7 +15,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 Este projeto se comunica com um backend desenvolvido em Node.js (ou a tecnologia usada).
 O código-fonte do backend está disponível no seguinte repositório:
 
-🔗 Repositório do Backend: [github.com/seu-usuario/backend-repo](https://github.com/Vitorialuz229/api-crud-customers)
+🔗 Repositório do Backend: [Link do repositório](https://github.com/Vitorialuz229/api-crud-customers)
 
 A API utilizada deve conter os seguintes endpoints:
 
