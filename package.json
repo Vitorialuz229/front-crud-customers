@@ -1,29 +1,45 @@
 {
-  "name": "front-crud",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "front-crud-customers",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Vitorialuz229"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@headlessui/react": "^1.7.18",
+    "daisyui": "^4.6.1",
+    "front-crud-customers": "file:",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^1.3.0",
+    "react-router-dom": "^6.21.3",
+    "vite-react-ts-tailwind-starter": "file:"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.17.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "typescript": "~5.6.2",
-    "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
+    "@types/react": "18.2.50",
+    "@types/react-dom": "18.2.18",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "postcss": "^8.4.33",
+    "prettier": "^3.2.4",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^4.4.9",
+    "vite-tsconfig-paths": "^4.3.1"
   }
 }
