@@ -1,5 +1,15 @@
+# Ignorar dependências do Node.js
 node_modules
+
+# Ignorar arquivos específicos do macOS
 .DS_Store
+
+# Ignorar diretórios de build
 dist
 dist-ssr
+
+# Ignorar arquivos locais e de configuração sensíveis
 *.local
+
+# Ignorar arquivos específicos do projeto
+src/services/api.ts
