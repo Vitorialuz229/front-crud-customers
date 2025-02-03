@@ -1,5 +1,5 @@
 import { Trash2, Edit } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, FormEvent } from 'react';
 import { api } from '~/services/Api';
 
 interface CustomerProps {
@@ -25,12 +25,40 @@ function Main() {
     setCustomers(response.data);
   }
 
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    if (!nameRef.current?.value || !emailRef.current?.value) {
+      alert('Preencha todos os campos');
+      return;
+    }
+
+    const response = await api.post('/customer', {
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
+    });
+
+    setCustomers((allCustomers) => [...allCustomers, response.data]);
+  }
+
+  async function handleDelete(id: string) {
+    try {
+      await api.delete(`/customer`, {
+        params: { id },
+      });
+    } catch (error: any) {
+      console.error('Error:', error.message);
+    }
+
+    setCustomers((allCustomers) => allCustomers.filter((customer) => customer.id !== id));
+  }
+
   return (
     <div className="w-full min-h-screen bg-gray-900 flex justify-center px-4">
       <main className="my-10 w-full md:max-w-2xl">
         <h1 className="text-4xl font-medium text-white">Clientes</h1>
 
-        <form className="flex flex-col md:flex-row md:items-end my-6 gap-4">
+        <form className="flex flex-col md:flex-row md:items-end my-6 gap-4" onSubmit={handleSubmit}>
           <div className="w-full md:w-1/2">
             <label className="block text-sm font-medium text-white" htmlFor="name">
               Nome
@@ -50,7 +78,7 @@ function Main() {
               Email
             </label>
             <input
-             ref={emailRef}
+              ref={emailRef}
               className="mt-1 p-2 focus:ring-white focus:border-white block w-full sm:text-sm border-gray-300 rounded-md"
               type="email"
               id="email"
@@ -71,9 +99,10 @@ function Main() {
 
         <section className="flex flex-col space-y-4">
           {customers.map((customers) => (
-            <article 
-              key={customers.id}  
-              className="w-full bg-white rounded-md shadow-md hover:scale-105 transition-transform duration-200">
+            <article
+              key={customers.id}
+              className="w-full bg-white rounded-md shadow-md hover:scale-105 transition-transform duration-200"
+            >
               <div className="flex justify-between items-center p-4">
                 <div>
                   <p>
@@ -94,7 +123,10 @@ function Main() {
                 </div>
 
                 <div className="flex justify-center p-4">
-                  <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600">
+                  <button
+                    className="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600"
+                    onClick={() => handleDelete(customers.id)}
+                  >
                     <Trash2 className="w-4 h-4" />
                   </button>
                   <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 ml-4">
