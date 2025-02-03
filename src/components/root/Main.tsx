@@ -15,6 +15,7 @@ function Main() {
   const [customers, setCustomers] = useState<CustomerProps[]>([]);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
+  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
 
   useEffect(() => {
     loadCustomers();
@@ -24,7 +25,6 @@ function Main() {
     const response = await api.get('/customers');
     setCustomers(response.data);
   }
-
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
@@ -33,12 +33,32 @@ function Main() {
       return;
     }
 
-    const response = await api.post('/customer', {
-      name: nameRef.current?.value,
-      email: emailRef.current?.value,
-    });
+    const customerData = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+    };
 
-    setCustomers((allCustomers) => [...allCustomers, response.data]);
+    try {
+      if (editingCustomerId) {
+        await api.put(`/customer/${editingCustomerId}`, customerData);
+
+        setCustomers((prevCustomers) =>
+          prevCustomers.map((customer) =>
+            customer.id === editingCustomerId ? { ...customer, ...customerData } : customer,
+          ),
+        );
+
+        setEditingCustomerId(null);
+      } else {
+        const response = await api.post('/customer', customerData);
+        setCustomers((prevCustomers) => [...prevCustomers, response.data]);
+      }
+
+      if (nameRef.current) nameRef.current.value = '';
+      if (emailRef.current) emailRef.current.value = '';
+    } catch (error: any) {
+      console.error('Erro ao salvar cliente:', error.message);
+    }
   }
 
   async function handleDelete(id: string) {
@@ -51,6 +71,12 @@ function Main() {
     }
 
     setCustomers((allCustomers) => allCustomers.filter((customer) => customer.id !== id));
+  }
+
+  function handleEditClick(customer: CustomerProps) {
+    setEditingCustomerId(customer.id);
+    if (nameRef.current) nameRef.current.value = customer.name;
+    if (emailRef.current) emailRef.current.value = customer.email;
   }
 
   return (
@@ -90,9 +116,11 @@ function Main() {
           <div className="flex justify-center w-full md:w-auto">
             <button
               type="submit"
-              className="w-full md:w-32 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600"
+              className={`w-full md:w-32 py-2 text-sm font-medium text-white rounded-md ${
+                editingCustomerId ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600'
+              }`}
             >
-              Cadastrar
+              {editingCustomerId ? 'Atualizar' : 'Cadastrar'}
             </button>
           </div>
         </form>
@@ -129,7 +157,10 @@ function Main() {
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
-                  <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 ml-4">
+                  <button
+                    className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 ml-4"
+                    onClick={() => handleEditClick(customers)}
+                  >
                     <Edit className="w-4 h-4 " />
                   </button>
                 </div>
