@@ -12,7 +12,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 * 🔄 Axios – Cliente HTTP para comunicação com a API.
 
 ## 🔗 API
-Este projeto se comunica com um backend desenvolvido em Node.js (ou a tecnologia usada).
+Este projeto se comunica com um backend desenvolvido em Node.js.
 O código-fonte do backend está disponível no seguinte repositório:
 
 🔗 Repositório do Backend: [Link do repositório](https://github.com/Vitorialuz229/api-crud-customers)
