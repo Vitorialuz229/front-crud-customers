@@ -7,9 +7,9 @@ Este projeto é um CRUD (Create, Read, Update, Delete) para gerenciamento de cli
 ## 🚀 Tecnologias
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-* ⚛️ ReactJS – Biblioteca JavaScript para construção de interfaces modernas e performáticas.
-* 🏷 TypeScript – Superset do JavaScript que adiciona tipagem estática ao código.
-* 🔄 Axios – Cliente HTTP para comunicação com a API.
+* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+* ![Axios](https://img.shields.io/badge/Axios-1.4.0-blue?style=flat&logo=axios)
 
 ## 🔗 API
 Este projeto se comunica com um backend desenvolvido em Node.js.
